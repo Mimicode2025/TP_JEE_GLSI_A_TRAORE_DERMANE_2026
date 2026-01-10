@@ -33,6 +33,4 @@ public class Client {
     private LocalDate dateNaissance;
     private String nationalite;
 
-    @OneToMany(mappedBy = "proprietaireCompte", cascade = CascadeType.ALL)
-    private List<Compte> comptes;
 }

@@ -7,8 +7,8 @@ import traore.com.system_gestion_ega.Service.Implementation.ClientServiceImpleme
 import java.util.List;
 
 @RestController
-@CrossOrigin
-@RequestMapping("/client")
+@CrossOrigin("*")
+@RequestMapping("api/client")
 public class ClientController {
     private final ClientServiceImplementation clientServiceImplementation;
 
@@ -33,7 +33,7 @@ public class ClientController {
     }
 
 
-    @GetMapping
+    @GetMapping("/clients")
     public List<Client> getAllClient() {
         return clientServiceImplementation.getAllClients();
     }

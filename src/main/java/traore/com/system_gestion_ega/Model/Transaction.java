@@ -23,14 +23,14 @@ public class Transaction {
     private TypeTransaction typeTransaction;
 
     private LocalDate transactionDate;
-    private Double Montant;
+    private Double montant;
 
     @ManyToOne
     @JoinColumn(name = "compte_envoie")
     private Compte compteEnvoie;
 
     @ManyToOne
-    @JoinColumn(name = "compte_dstination")
+    @JoinColumn(name = "compte_destination")
     private Compte compteDestination;
 
 }
