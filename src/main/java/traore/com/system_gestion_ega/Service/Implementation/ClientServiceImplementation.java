@@ -2,6 +2,7 @@ package traore.com.system_gestion_ega.Service.Implementation;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import traore.com.system_gestion_ega.Enum.Sexe;
 import traore.com.system_gestion_ega.Model.Client;
 import traore.com.system_gestion_ega.Repository.ClientRepository;
 import traore.com.system_gestion_ega.Service.ClientService;
@@ -49,6 +50,27 @@ public class ClientServiceImplementation implements ClientService {
     @Override
     public Client createClient(Client client) {
         return clientRepository.save(client);
+    }
+
+    public List<Client> findByNomOrPrenom(String query) {
+        return clientRepository.findByNomContainingIgnoreCaseOrPrenomContainingIgnoreCase(query, query);
+    }
+
+    @Override
+    public List<Client> findByNationalite(String nationalite) {
+        return clientRepository.findByNationaliteIgnoreCase(nationalite);
+    }
+
+    @Override
+    public List<Client> findBySexe(String sexe) {
+        try {
+            // Convertit le String en Enum, insensible à la casse
+            Sexe sexeEnum = Sexe.valueOf(sexe.toUpperCase());
+            return clientRepository.findBySexe(sexeEnum);
+        } catch (IllegalArgumentException e) {
+            // Si la valeur passée n'existe pas dans l'enum, retourne une liste vide
+            return List.of();
+        }
     }
 
 }

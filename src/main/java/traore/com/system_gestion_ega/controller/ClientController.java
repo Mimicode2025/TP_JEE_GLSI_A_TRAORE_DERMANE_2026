@@ -38,4 +38,21 @@ public class ClientController {
         return clientServiceImplementation.getAllClients();
     }
 
+    @GetMapping("/search/{nomOuPrenom}")
+    public List<Client> searchByNomOrPrenom(@RequestParam String query) {
+        return clientServiceImplementation.findByNomOrPrenom(query);
+    }
+
+    @GetMapping("/nationalite")
+    public List<Client> searchByNationalite(@RequestParam String nationalite) {
+        return clientServiceImplementation.findByNationalite(nationalite);
+    }
+
+    @GetMapping("/sexe")
+    public List<Client> searchBySexe(@RequestParam String sexe) {
+        if (sexe == null || sexe.isBlank()) {
+            return List.of();
+        }
+        return clientServiceImplementation.findBySexe(sexe);
+    }
 }
