@@ -8,5 +8,4 @@ import java.util.Optional;
 public interface CompteRepository extends JpaRepository<Compte, Long> {
     Optional<Compte> findCompteById(Long id);
     Optional<Compte> findByNumCompte(String code);
-
 }

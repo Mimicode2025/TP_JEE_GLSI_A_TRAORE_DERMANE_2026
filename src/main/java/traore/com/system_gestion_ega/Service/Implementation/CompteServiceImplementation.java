@@ -195,22 +195,26 @@ public class CompteServiceImplementation implements CompteService {
 
     public ReleveBancaireDTO genererReleve(String numCompte) {
 
-        // 1. Récupérer le compte
+        // 1. Récupérer le compte avec ses informations
         Compte compte = compteRepository.findByNumCompte(numCompte)
                 .orElseThrow(() -> new RuntimeException("Compte introuvable"));
 
-        // 2. Récupérer les transactions (Assure-toi que cette méthode existe dans le Repository)
+        // 2. Récupérer l'historique des transactions
         List<Transaction> transactions = transactionRepository
                 .findByCompteEnvoie_NumCompteOrCompteDestination_NumCompte(numCompte, numCompte);
 
-        // 3. Construction du DTO avec le Builder (plus sécurisé)
+        // 3. Construction du DTO enrichi selon votre nouvelle structure
         return ReleveBancaireDTO.builder()
                 .numCompte(compte.getNumCompte())
                 .nomClient(compte.getProprietaireCompte().getNom())
                 .prenomClient(compte.getProprietaireCompte().getPrenom())
                 .email(compte.getProprietaireCompte().getEmail())
                 .telephoneClient(compte.getProprietaireCompte().getTelephone())
-                .sexe(compte.getProprietaireCompte().getSexe())
+                // --- NOUVELLES INFORMATIONS AJOUTÉES ---
+                .adresse(compte.getProprietaireCompte().getAdresse()) // Récupère l'adresse du client
+                .telephone("+(228) 71 39 13 93") // Téléphone fixe de la banque EGA (Exemple)
+                .typeCompte(compte.getTypeCompte()) // Utilise l'Enum TypeComptes
+                // ---------------------------------------
                 .solde(compte.getSolde())
                 .transactions(transactions)
                 .build();

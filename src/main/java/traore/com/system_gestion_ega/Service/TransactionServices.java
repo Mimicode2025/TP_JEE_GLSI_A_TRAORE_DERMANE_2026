@@ -1,5 +1,6 @@
 package traore.com.system_gestion_ega.Service;
 
+import traore.com.system_gestion_ega.Model.Client;
 import traore.com.system_gestion_ega.Model.Transaction;
 
 import java.time.LocalDateTime;

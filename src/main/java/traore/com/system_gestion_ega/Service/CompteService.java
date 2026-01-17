@@ -1,5 +1,6 @@
 package traore.com.system_gestion_ega.Service;
 
+import traore.com.system_gestion_ega.Enum.TypeComptes;
 import traore.com.system_gestion_ega.Model.Compte;
 import traore.com.system_gestion_ega.Model.Transaction;
 
